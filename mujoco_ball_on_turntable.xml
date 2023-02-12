@@ -1,0 +1,44 @@
+<!-- 
+Copyright 2020 The dm_control Authors and Copyright 2023 Randall Britten
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. 
+
+Based on https://github.com/deepind/dm_control/blob/main/tutorial.ipynb ("the original") (commit 774f4)
+Changes relative to the original
+- Extracted just xml that pertained to "tippe-top", and adapted to "ball on turntable"
+-->
+<mujoco model="Ball on Turntable">
+  <option integrator="RK4" noslip_iterations="100" />
+  <asset>
+    <texture name="grid_floor" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="300" height="300"/>
+    <material name="grid_floor" texture="grid_floor" texrepeat="8 8" reflectance=".2"/>
+
+    <texture name="grid_turntable" type="2d" builtin="checker" rgb1=".3 .2 .1" rgb2=".4 .3 .2" width="300" height="300"/>
+    <material name="grid_turntable" texture="grid_turntable" texrepeat="4 4" reflectance=".2"/>
+
+    <texture name="grid_ball" type="2d" builtin="checker" rgb1="1 1 1" rgb2="0 0 0" width="100" height="100"/>
+    <material name="grid_ball" texture="grid_ball" texrepeat="1 1" reflectance=".2"/>
+  </asset>
+  <worldbody>
+    <geom size="50 50 .01" type="plane" material="grid_floor"/>
+    <light pos="0 5 20"/>
+    <light directional="true" castshadow="false"/>
+    <camera name="closeup" pos="0 -35 35" xyaxes="1 0 0 0 1 1"/>
+    <body name="ball1" pos="0 0 2.81">
+      <freejoint/>
+      <geom name="ball1_geom" type="sphere" size="0.8" material="grid_ball" />
+    </body>
+    <body name="turntable" pos="0 0 1.01">
+      <joint name="axle" type="hinge" axis="0 0 1" pos="0 0 0"/>
+      <geom name="turntable_geom" type="cylinder" pos="0 0 0" size="12 1" material="grid_turntable"/>
+    </body>
+  </worldbody>
+  <keyframe>
+    <key name="spinning" 
+    qpos="5 0 2.81 0 0 0 0 0" 
+    qvel="0 0 0 25 0 0 5" />
+  </keyframe>
+  <actuator>
+    <velocity name="velocity_ttbl" joint="axle" kv="1e5" ctrlrange="5 6" ctrllimited="true" />
+  </actuator>
+</mujoco>
