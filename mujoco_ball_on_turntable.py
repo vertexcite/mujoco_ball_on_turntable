@@ -58,59 +58,67 @@ physics = mujoco.Physics.from_xml_path("mujoco_ball_on_turntable.xml")
 duration = 10   # (seconds)
 framerate = 60  # (Hz)
 
-# Simulate and display video.
+# For video.
 frames = []
 
-physics.reset(0)  # Reset to keyframe 0 (load a saved state).
-while physics.data.time < duration:
-  physics.step()
-  if len(frames) < (physics.data.time) * framerate:
-    pixels = physics.render(camera_id='closeup')
-    frames.append(pixels)
-
-playback_speed = 1.0
-save_video(frames, framerate, playback_speed)
-
-
-# Measuring values
+# For values
 timevals = []
 angular_velocity = []
 ball_x = []
 ball_y = []
 ball_xyz = []
 
-# Simulate and save data
-physics.reset(0)
+ball_name = 0
+
+physics.reset(0)  # Reset to keyframe 0 (load a saved state).
 while physics.data.time < duration:
   physics.step()
+
+  if len(frames) < (physics.data.time) * framerate:
+    pixels = physics.render(camera_id='closeup')
+    frames.append(pixels)
+  
   timevals.append(physics.data.time)
   angular_velocity.append(physics.data.qvel[3:6].copy())
   ball_x.append(physics.named.data.geom_xpos['ball1_geom', 'x'])
   ball_y.append(physics.named.data.geom_xpos['ball1_geom', 'y'])
   ball_xyz.append(physics.data.qpos[0:3].copy())
 
-dpi = 100
-width = 480
-height = 980
-figsize = (width / dpi, height / dpi)
-_, ax = plt.subplots(3, 1, figsize=figsize, dpi=dpi, sharex=False)
-# space subplots so that title doesn't overlap with x-axis labels
-plt.subplots_adjust(hspace=0.5)
+  # ball_name as string with leading zeros  
+  if physics.data.time % 0.5 < physics.model.opt.timestep:
+    print(f"""
+    <body name="ball{"{:02d}".format(ball_name)}" pos="{" ".join(map(str, physics.data.qpos[0:2]))} 2.21">
+      <freejoint/>
+      <geom name="ball{"{:02d}".format(ball_name)}_geom" type="sphere" size="0.2" material="grid_ball" />
+    </body>
+    """)
+    ball_name += 1
 
-ax[0].plot(timevals, angular_velocity)
-ax[0].set_xlabel('time(seconds)')
-ax[0].set_ylabel('radians / second')
-ax[0].set_title('Ball angular velocity')
+# playback_speed = 1.0
+# save_video(frames, framerate, playback_speed)
 
-ax[1].plot(ball_x, ball_y)
-ax[1].set_xlabel('ball x (metres)')
-ax[1].set_ylabel('ball y (meters)')
-ax[1].set_title('Ball path')
+# dpi = 100
+# width = 480
+# height = 980
+# figsize = (width / dpi, height / dpi)
+# _, ax = plt.subplots(3, 1, figsize=figsize, dpi=dpi, sharex=False)
+# # space subplots so that title doesn't overlap with x-axis labels
+# plt.subplots_adjust(hspace=0.5)
 
-ax[2].plot(timevals, ball_xyz)
-ax[2].set_xlabel('time(seconds)')
-ax[2].set_ylabel('ball coordinates (metres)')
-ax[2].set_title('Ball coordinates')
+# ax[0].plot(timevals, angular_velocity)
+# ax[0].set_xlabel('time(seconds)')
+# ax[0].set_ylabel('radians / second')
+# ax[0].set_title('Ball angular velocity')
+
+# ax[1].plot(ball_x, ball_y)
+# ax[1].set_xlabel('ball x (metres)')
+# ax[1].set_ylabel('ball y (meters)')
+# ax[1].set_title('Ball path')
+
+# ax[2].plot(timevals, ball_xyz)
+# ax[2].set_xlabel('time(seconds)')
+# ax[2].set_ylabel('ball coordinates (metres)')
+# ax[2].set_title('Ball coordinates')
 
 
-plt.savefig("mujoco_ball_on_turntable_plots.png")
+# plt.savefig("mujoco_ball_on_turntable_plots.png")
