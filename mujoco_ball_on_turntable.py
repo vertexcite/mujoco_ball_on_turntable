@@ -55,7 +55,7 @@ def save_video(frames, framerate=30, playback_speed=1.0):
 
 physics = mujoco.Physics.from_xml_path("mujoco_ball_on_turntable.xml")
 
-duration = 10   # (seconds)
+duration = 9   # (seconds)
 framerate = 60  # (Hz)
 
 # For video.
@@ -67,8 +67,6 @@ angular_velocity = []
 ball_x = []
 ball_y = []
 ball_xyz = []
-
-ball_name = 0
 
 physics.reset(0)  # Reset to keyframe 0 (load a saved state).
 while physics.data.time < duration:
@@ -84,15 +82,12 @@ while physics.data.time < duration:
   ball_y.append(physics.named.data.geom_xpos['ball1_geom', 'y'])
   ball_xyz.append(physics.data.qpos[0:3].copy())
 
-  # ball_name as string with leading zeros  
+  # capture x, y of ball and angular velocity of ball every 0.5 seconds
   if physics.data.time % 0.5 < physics.model.opt.timestep:
-    print(f"""
-    <body name="ball{"{:02d}".format(ball_name)}" pos="{" ".join(map(str, physics.data.qpos[0:2]))} 2.11">
-      <freejoint/>
-      <geom name="ball{"{:02d}".format(ball_name)}_geom" type="sphere" size="0.1" material="grid_ball" />
-    </body>
-    """)
-    ball_name += 1
+    # print("ball xy: ", physics.data.qpos[0:2])
+    print(" ".join(map(str, physics.data.qvel[0:6])), end="")
+    print(" ", end="")
+    print()
 
 # playback_speed = 1.0
 # save_video(frames, framerate, playback_speed)
