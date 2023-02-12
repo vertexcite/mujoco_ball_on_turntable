@@ -50,10 +50,10 @@ def save_video(frames, framerate=30, playback_speed=1.0):
                                    interval=interval, blit=True, repeat=False)
     FFwriter = animation.FFMpegWriter(fps=framerate * playback_speed)
     # anim.save('animation.gif') # Uncomment to save as GIF.
-    anim.save('mujoco_ball_on_turntable.mp4', writer = FFwriter) # Assumes ffmpeg is installed. (Hint: use conda install ffmpeg)
+    anim.save('mujoco_ball_on_turntable_steady_state.mp4', writer = FFwriter) # Assumes ffmpeg is installed. (Hint: use conda install ffmpeg)
 
 
-physics = mujoco.Physics.from_xml_path("mujoco_ball_on_turntable.xml")
+physics = mujoco.Physics.from_xml_path("mujoco_ball_on_turntable_steady_state.xml")
 
 duration = 10   # (seconds)
 framerate = 60  # (Hz)
@@ -77,7 +77,6 @@ timevals = []
 angular_velocity = []
 ball_x = []
 ball_y = []
-ball_xyz = []
 
 # Simulate and save data
 physics.reset(0)
@@ -87,13 +86,12 @@ while physics.data.time < duration:
   angular_velocity.append(physics.data.qvel[3:6].copy())
   ball_x.append(physics.named.data.geom_xpos['ball1_geom', 'x'])
   ball_y.append(physics.named.data.geom_xpos['ball1_geom', 'y'])
-  ball_xyz.append(physics.data.qpos[0:3].copy())
-
+  
 dpi = 100
 width = 480
-height = 980
+height = 1280
 figsize = (width / dpi, height / dpi)
-_, ax = plt.subplots(3, 1, figsize=figsize, dpi=dpi, sharex=False)
+_, ax = plt.subplots(4, 1, figsize=figsize, dpi=dpi, sharex=False)
 # space subplots so that title doesn't overlap with x-axis labels
 plt.subplots_adjust(hspace=0.5)
 
@@ -107,10 +105,13 @@ ax[1].set_xlabel('ball x (metres)')
 ax[1].set_ylabel('ball y (meters)')
 ax[1].set_title('Ball path')
 
-ax[2].plot(timevals, ball_xyz)
+ax[2].plot(timevals, ball_x)
 ax[2].set_xlabel('time(seconds)')
-ax[2].set_ylabel('ball coordinates (metres)')
+ax[2].set_ylabel('ball x coordinate (metres)')
 ax[2].set_title('Ball coordinates')
 
+ax[3].plot(timevals, ball_y)
+ax[3].set_xlabel('time(seconds)')
+ax[3].set_ylabel('ball y coordinate (metres)')
 
-plt.savefig("mujoco_ball_on_turntable_plots.png")
+plt.savefig("mujoco_ball_on_turntable_steady_state_plots.png")
