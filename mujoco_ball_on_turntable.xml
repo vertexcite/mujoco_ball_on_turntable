@@ -24,9 +24,9 @@ Changes relative to the original
     <light pos="0 5 20"/>
     <light directional="true" castshadow="false"/>
     <camera name="closeup" pos="0 -35 35" xyaxes="1 0 0 0 1 1"/>
-    <body name="ball1" pos="0 0 2.21">
+    <body name="ball1" pos="0 0 2.11">
       <freejoint/>
-      <geom name="ball1_geom" type="sphere" size="0.2" material="grid_ball" />
+      <geom name="ball1_geom" type="sphere" size="0.1" material="grid_ball" />
     </body>
     <body name="turntable" pos="0 0 1.01">
       <joint name="axle" type="hinge" axis="0 0 1" pos="0 0 0"/>
@@ -35,8 +35,8 @@ Changes relative to the original
   </worldbody>
   <keyframe>
     <key name="spinning" 
-    qpos="7 0 2.21 0 0 0 0 0" 
-    qvel="0 0 0 125 0 0 5" />
+    qpos="7 0 2.11 0 0 0 0 0" 
+    qvel="0 0 0 250 0 0 5" />
   </keyframe>
   <actuator>
     <velocity name="velocity_ttbl" joint="axle" kv="1e5" ctrlrange="5 6" ctrllimited="true" />

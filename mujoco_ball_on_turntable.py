@@ -87,9 +87,9 @@ while physics.data.time < duration:
   # ball_name as string with leading zeros  
   if physics.data.time % 0.5 < physics.model.opt.timestep:
     print(f"""
-    <body name="ball{"{:02d}".format(ball_name)}" pos="{" ".join(map(str, physics.data.qpos[0:2]))} 2.21">
+    <body name="ball{"{:02d}".format(ball_name)}" pos="{" ".join(map(str, physics.data.qpos[0:2]))} 2.11">
       <freejoint/>
-      <geom name="ball{"{:02d}".format(ball_name)}_geom" type="sphere" size="0.2" material="grid_ball" />
+      <geom name="ball{"{:02d}".format(ball_name)}_geom" type="sphere" size="0.1" material="grid_ball" />
     </body>
     """)
     ball_name += 1
