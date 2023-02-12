@@ -23,7 +23,7 @@ Changes relative to the original
     <geom size="50 50 .01" type="plane" material="grid_floor"/>
     <light pos="0 5 20"/>
     <light directional="true" castshadow="false"/>
-    <camera name="closeup" pos="0 -35 35" xyaxes="1 0 0 0 1 1"/>
+    <camera name="closeup" pos="5 -15 15" xyaxes="1 0 0 0 1 1"/>
 
 
 

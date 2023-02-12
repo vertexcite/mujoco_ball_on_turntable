@@ -53,9 +53,9 @@ def save_video(frames, framerate=30, playback_speed=1.0):
     anim.save('mujoco_ball_on_turntable.mp4', writer = FFwriter) # Assumes ffmpeg is installed. (Hint: use conda install ffmpeg)
 
 
-physics = mujoco.Physics.from_xml_path("mujoco_ball_on_turntable.xml")
+physics = mujoco.Physics.from_xml_path("mujoco_ball_on_turntable_flock.xml")
 
-duration = 9   # (seconds)
+duration = 40   # (seconds)
 framerate = 60  # (Hz)
 
 # For video.
@@ -73,44 +73,41 @@ while physics.data.time < duration:
   physics.step()
 
   if len(frames) < (physics.data.time) * framerate:
-    pixels = physics.render(camera_id='closeup')
+    pixels = physics.render(camera_id='closeup', height=480, width=640)
     frames.append(pixels)
   
   timevals.append(physics.data.time)
-  angular_velocity.append(physics.data.qvel[3:6].copy())
-  ball_x.append(physics.named.data.geom_xpos['ball1_geom', 'x'])
-  ball_y.append(physics.named.data.geom_xpos['ball1_geom', 'y'])
+  angular_velocity.append(physics.data.qvel[3:7].copy())
+  ball_x.append(physics.named.data.geom_xpos['ball01_geom', 'x'])
+  ball_y.append(physics.named.data.geom_xpos['ball01_geom', 'y'])
   ball_xyz.append(physics.data.qpos[0:3].copy())
 
-  # capture x, y of ball and angular velocity of ball every 0.5 seconds
-  if physics.data.time % 0.5 < physics.model.opt.timestep:
-    print(f'{" ".join(map(str, physics.data.qpos[0:2]))}  2.11 {" ".join(map(str, physics.data.qpos[3:7]))} ')
 
-# playback_speed = 1.0
-# save_video(frames, framerate, playback_speed)
+playback_speed = 1.0
+save_video(frames, framerate, playback_speed)
 
-# dpi = 100
-# width = 480
-# height = 980
-# figsize = (width / dpi, height / dpi)
-# _, ax = plt.subplots(3, 1, figsize=figsize, dpi=dpi, sharex=False)
-# # space subplots so that title doesn't overlap with x-axis labels
-# plt.subplots_adjust(hspace=0.5)
+dpi = 100
+width = 480
+height = 980
+figsize = (width / dpi, height / dpi)
+_, ax = plt.subplots(3, 1, figsize=figsize, dpi=dpi, sharex=False)
+# space subplots so that title doesn't overlap with x-axis labels
+plt.subplots_adjust(hspace=0.5)
 
-# ax[0].plot(timevals, angular_velocity)
-# ax[0].set_xlabel('time(seconds)')
-# ax[0].set_ylabel('radians / second')
-# ax[0].set_title('Ball angular velocity')
+ax[0].plot(timevals, angular_velocity)
+ax[0].set_xlabel('time(seconds)')
+ax[0].set_ylabel('radians / second')
+ax[0].set_title('Ball angular velocity')
 
-# ax[1].plot(ball_x, ball_y)
-# ax[1].set_xlabel('ball x (metres)')
-# ax[1].set_ylabel('ball y (meters)')
-# ax[1].set_title('Ball path')
+ax[1].plot(ball_x, ball_y)
+ax[1].set_xlabel('ball x (metres)')
+ax[1].set_ylabel('ball y (meters)')
+ax[1].set_title('Ball path')
 
-# ax[2].plot(timevals, ball_xyz)
-# ax[2].set_xlabel('time(seconds)')
-# ax[2].set_ylabel('ball coordinates (metres)')
-# ax[2].set_title('Ball coordinates')
+ax[2].plot(timevals, ball_xyz)
+ax[2].set_xlabel('time(seconds)')
+ax[2].set_ylabel('ball coordinates (metres)')
+ax[2].set_title('Ball coordinates')
 
 
-# plt.savefig("mujoco_ball_on_turntable_plots.png")
+plt.savefig("mujoco_ball_on_turntable_plots.png")
