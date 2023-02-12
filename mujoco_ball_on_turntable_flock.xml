@@ -1,0 +1,199 @@
+<!-- 
+Copyright 2020 The dm_control Authors and Copyright 2023 Randall Britten
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. 
+
+Based on https://github.com/deepind/dm_control/blob/main/tutorial.ipynb ("the original") (commit 774f4)
+Changes relative to the original
+- Extracted just xml that pertained to "tippe-top", and adapted to "ball on turntable"
+-->
+<mujoco model="Ball on Turntable - Flock">
+  <option integrator="RK4" noslip_iterations="100" />
+  <asset>
+    <texture name="grid_floor" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="300" height="300"/>
+    <material name="grid_floor" texture="grid_floor" texrepeat="8 8" reflectance=".2"/>
+
+    <texture name="grid_turntable" type="2d" builtin="checker" rgb1=".3 .2 .1" rgb2=".4 .3 .2" width="300" height="300"/>
+    <material name="grid_turntable" texture="grid_turntable" texrepeat="4 4" reflectance=".2"/>
+
+    <texture name="grid_ball" type="2d" builtin="checker" rgb1="1 1 1" rgb2="0 0 0" width="100" height="100"/>
+    <material name="grid_ball" texture="grid_ball" texrepeat="1 1" reflectance=".2"/>
+  </asset>
+  <worldbody>
+    <geom size="50 50 .01" type="plane" material="grid_floor"/>
+    <light pos="0 5 20"/>
+    <light directional="true" castshadow="false"/>
+    <camera name="closeup" pos="5 -15 15" xyaxes="1 0 0 0 1 1"/>
+
+
+
+
+
+
+  <body name="ball00" pos="6.800507613271711 0.9689249838594978 2.11">
+      <freejoint/>
+      <geom name="ball00_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball01" pos="5.709474975200095 1.920970714994796 2.11">
+      <freejoint/>
+      <geom name="ball01_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball02" pos="4.239198820596542 1.9204205989759264 2.11">
+      <freejoint/>
+      <geom name="ball02_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball03" pos="3.1189409151491083 0.9487172135645483 2.11">
+      <freejoint/>
+      <geom name="ball03_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball04" pos="2.914630516204538 -0.5354677826891229 2.11">
+      <freejoint/>
+      <geom name="ball04_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball05" pos="3.7474059562705997 -1.7945102637409682 2.11">
+      <freejoint/>
+      <geom name="ball05_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball06" pos="5.220653043017483 -2.20341288623766 2.11">
+      <freejoint/>
+      <geom name="ball06_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball07" pos="6.610167776509038 -1.5406124526198182 2.11">
+      <freejoint/>
+      <geom name="ball07_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball08" pos="7.212221427418512 -0.11785200835729726 2.11">
+      <freejoint/>
+      <geom name="ball08_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball09" pos="6.703595960967122 1.3569613682556028 2.11">
+      <freejoint/>
+      <geom name="ball09_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball10" pos="5.3213140020719765 2.134528658876475 2.11">
+      <freejoint/>
+      <geom name="ball10_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball11" pos="3.7462678851582245 1.8097585045316633 2.11">
+      <freejoint/>
+      <geom name="ball11_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball12" pos="2.7623515577171753 0.5224357209000688 2.11">
+      <freejoint/>
+      <geom name="ball12_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball13" pos="2.8704667956398966 -1.1067635412929722 2.11">
+      <freejoint/>
+      <geom name="ball13_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball14" pos="4.038672198254207 -2.276781567836367 2.11">
+      <freejoint/>
+      <geom name="ball14_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball15" pos="5.70629010755536 -2.396396980431915 2.11">
+      <freejoint/>
+      <geom name="ball15_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball16" pos="7.046566011154354 -1.3838940453699422 2.11">
+      <freejoint/>
+      <geom name="ball16_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+    <body name="ball17" pos="7.372987959140701 0.2710397639391724 2.11">
+      <freejoint/>
+      <geom name="ball17_geom" type="sphere" size="0.1" material="grid_ball" />
+    </body>
+
+
+
+
+
+    <body name="turntable" pos="0 0 1.01">
+      <joint name="axle" type="hinge" axis="0 0 1" pos="0 0 0"/>
+      <geom name="turntable_geom" type="cylinder" pos="0 0 0" size="12 1" material="grid_turntable"/>
+    </body>
+  </worldbody>
+ 
+  <actuator>
+    <velocity name="velocity_ttbl" joint="axle" kv="1e5" ctrlrange="5 6" ctrllimited="true" />
+  </actuator>
+
+
+  <keyframe>
+    <key name="spinning" 
+    qpos="
+    6.800507613271711 0.9689249838594978 2.11 0.7671958026660487 -0.6386429365357119 -0.0476027107927235 0.03577403960729458
+      5.709474975200095 1.920970714994796 2.11 0.8988095624275281 -0.42213701250790403 -0.06337589854321946 0.09962534137244765
+      4.239198820596542 1.9204205989759264 2.11 -0.1882373776334534 0.968594135498407 0.159070605856369 -0.0329944342618919
+      3.1189409151491083 0.9487172135645483 2.11 -0.8575979311901584 -0.5082008619522799 -0.04577391350839396 -0.06451682859104563
+      2.914630516204538 -0.5354677826891229 2.11 -0.5530771184297602 -0.831234457098939 0.03814853630355065 0.0412270248594556
+      3.7474059562705997 -1.7945102637409682 2.11 -0.35805159199264075 0.9237881498244666 -0.12507920056928645 0.052627989704840644
+      5.220653043017483 -2.20341288623766 2.11 0.8634405397148782 -0.48168754581170453 0.059267796788105495 -0.13760403646209235
+      6.610167776509038 -1.5406124526198182 2.11 -0.9622064055810825 -0.25089640214544673 0.02650760445310232 0.10250451382920622
+      7.212221427418512 -0.11785200835729726 2.11 -0.7782863928031899 0.6277343898014797 0.007854846840808135 0.012574896384077678
+      6.703595960967122 1.3569613682556028 2.11 -0.34846937370360515 0.9331507296175058 0.08350209108430967 -0.028743906997513786
+      5.3213140020719765 2.134528658876475 2.11 0.8738358330071596 0.47018021567377893 0.0647343494431464 0.10559813324019858
+      3.7462678851582245 1.8097585045316633 2.11 0.39463704988993065 -0.9042825702598023 -0.15114882396730892 0.06073438064060506
+      2.7623515577171753 0.5224357209000688 2.11 -0.8302594148728124 0.5544107529692055 0.044718527705700846 -0.03603157347394787
+      2.8704667956398966 -1.1067635412929722 2.11 0.552443911892424 0.8254305117228432 -0.08847244349258845 -0.07511871452848395
+      4.038672198254207 -2.276781567836367 2.11 0.35393119260062167 0.918148018486593 -0.16047309380246963 -0.07736480607426344
+      5.70629010755536 -2.396396980431915 2.11 -0.9776913430724214 -0.12595076888409498 0.025232046581495464 0.16619080998677235
+      7.046566011154354 -1.3838940453699422 2.11 0.48553308377370624 -0.8716238714723191 0.05541634233661538 -0.03819005423971814
+      7.372987959140701 0.2710397639391724 2.11 0.7983944234561235 0.6020307743573005 0.007424929207152422 -0.008376260930891466
+      0" 
+    qvel="
+      -1.3816499637935875 2.5918403632691596 9.92896254617199e-06 316.48372558514984 7.924072781363098 -4.799310646247667
+      -2.7949555687567367 1.0456302043207875 0.00038288890880565363 284.3686450239463 7.421896390803398 -4.2908787453161565
+      -2.8300407504782457 -1.0545809841278957 -0.0007103571970843115 233.92674505913112 6.257362657108042 -3.624811173926018
+      -1.4528982205831273 -2.669089225145521 -0.0007008596141373318 186.45869687261498 4.58042269310533 -3.1143617896520372
+      0.6811880751681052 -2.9879052270087696 -0.000688092920141255 176.2845217976449 4.127154125992742 -2.500448028683309
+      2.5120470730068987 -1.826635370373559 -0.00015038554717119345 214.11450640801115 5.780215727492521 -3.188226114280597
+      3.127007103697411 0.2693993413220633 0.0002525303056290759 268.6756878358852 6.979161802724617 -4.082347487240713
+      2.1839608304141813 2.2731436417430713 -0.0024984376319027828 311.7570800740861 8.400291908558842 -4.568023075625299
+      0.11031992569323942 3.168166035680842 3.810640406573178e-05 328.8829788409546 8.359082615876238 -5.024867700838035
+      -2.062266636372297 2.4675250195863763 -1.1787911338978082e-05 314.81176786984196 8.121454283835591 -5.124352764219625
+      -3.2282452583511976 0.5029120570587166 -0.00018212388675587334 272.7769793738823 7.258388555846887 -4.134643963884779
+      -2.7967218920391996 -1.7529888854963656 4.4275877136801755e-05 215.61667400591534 5.713047493643454 -3.2492423211248926
+      -0.9631403984086888 -3.1788844484104253 0.00043490752013066884 171.28106716384795 5.048014721647753 -2.892533862344192
+      1.384974230789896 -3.056889531254276 0.0013307228176955381 178.0113092724839 4.12134977465621 -2.5444427953666175
+      3.091722481186635 -1.415055473985671 -0.0004144386007043072 229.80082497307927 5.941508664134664 -3.5139497690274246
+      3.2888239886276316 0.9662349730340878 0.00012990547800074655 287.5835904964741 7.529903639489541 -4.215558303568295
+      1.8295954343932475 2.91221998094438 -3.0240895032598148e-06 326.49495460323817 8.178286523226454 -5.2315970777311875
+      -0.5900255179354446 3.41608557199917 -8.11835390954087e-05 334.74517726575584 9.051476786777725 -5.074209179898875
+    5" />
+  </keyframe>
+
+</mujoco>
