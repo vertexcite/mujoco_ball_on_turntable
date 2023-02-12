@@ -84,10 +84,7 @@ while physics.data.time < duration:
 
   # capture x, y of ball and angular velocity of ball every 0.5 seconds
   if physics.data.time % 0.5 < physics.model.opt.timestep:
-    # print("ball xy: ", physics.data.qpos[0:2])
-    print(" ".join(map(str, physics.data.qvel[0:6])), end="")
-    print(" ", end="")
-    print()
+    print(f'{" ".join(map(str, physics.data.qpos[0:2]))}  2.11 {" ".join(map(str, physics.data.qpos[3:7]))} ')
 
 # playback_speed = 1.0
 # save_video(frames, framerate, playback_speed)
