@@ -88,7 +88,7 @@ while physics.data.time < duration:
   ball_y.append(physics.named.data.geom_xpos['ball1_geom', 'y'])
   
 dpi = 100
-width = 480
+width = 600
 height = 1280
 figsize = (width / dpi, height / dpi)
 _, ax = plt.subplots(4, 1, figsize=figsize, dpi=dpi, sharex=False)
