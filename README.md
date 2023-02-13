@@ -26,4 +26,5 @@ https://user-images.githubusercontent.com/3136161/218303878-9cd7bccd-a0a8-4c28-8
 
 ![plot, one of the balls in orbit](mujoco_ball_on_turntable_flock_plots.png)
 
+![trajectory plot, one of the balls in orbit](mujoco_ball_on_turntable_flock_trajectory_plot.png)
 
