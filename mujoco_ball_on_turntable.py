@@ -102,6 +102,7 @@ ax[0].set_xlabel('time(seconds)')
 ax[0].set_ylabel('radians / second')
 ax[0].set_title('Ball angular velocity')
 
+ax[1].set_aspect('equal')
 ax[1].plot(ball_x, ball_y)
 ax[1].set_xlabel('ball x (metres)')
 ax[1].set_ylabel('ball y (meters)')
