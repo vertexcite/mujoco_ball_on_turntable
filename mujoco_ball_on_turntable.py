@@ -55,7 +55,7 @@ def save_video(frames, framerate=30, playback_speed=1.0):
 
 physics = mujoco.Physics.from_xml_path("mujoco_ball_on_turntable_flock.xml")
 
-duration = 40   # (seconds)
+duration = 35   # (seconds)
 framerate = 60  # (Hz)
 
 # For video.
@@ -88,9 +88,9 @@ save_video(frames, framerate, playback_speed)
 
 dpi = 100
 width = 480
-height = 980
+height = 640
 figsize = (width / dpi, height / dpi)
-_, ax = plt.subplots(3, 1, figsize=figsize, dpi=dpi, sharex=False)
+_, ax = plt.subplots(2, 1, figsize=figsize, dpi=dpi, sharex=True)
 # space subplots so that title doesn't overlap with x-axis labels
 plt.subplots_adjust(hspace=0.5)
 
@@ -99,15 +99,24 @@ ax[0].set_xlabel('time(seconds)')
 ax[0].set_ylabel('radians / second')
 ax[0].set_title('Ball angular velocity')
 
-ax[1].plot(ball_x, ball_y)
-ax[1].set_xlabel('ball x (metres)')
-ax[1].set_ylabel('ball y (meters)')
-ax[1].set_title('Ball path')
-
-ax[2].plot(timevals, ball_xyz)
-ax[2].set_xlabel('time(seconds)')
-ax[2].set_ylabel('ball coordinates (metres)')
-ax[2].set_title('Ball coordinates')
-
+ax[1].plot(timevals, ball_xyz)
+ax[1].set_xlabel('time(seconds)')
+ax[1].set_ylabel('ball coordinates (metres)')
+ax[1].set_title('Ball coordinates')
 
 plt.savefig("mujoco_ball_on_turntable_plots.png")
+
+
+width = 480
+height = 640
+figsize = (width / dpi, height / dpi)
+_, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi, sharex=True)
+
+ax.set_aspect('equal')
+ax.plot(ball_x, ball_y)
+ax.set_xlabel('ball x (metres)')
+ax.set_ylabel('ball y (meters)')
+ax.set_title('Ball path')
+
+plt.savefig("mujoco_ball_on_turntable_trajectory_plot.png")
+
